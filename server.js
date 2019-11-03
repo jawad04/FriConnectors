@@ -8,6 +8,9 @@ const app = express();
 
 connectDB();
 
+// init Midleware
+app.use(express.json({ extended: false }));
+
 // Define routes
 
 app.use("/api/users", require("./routes/api/users"));
