@@ -231,9 +231,97 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     const removeIndex = profile.experience
       .map(item => item.id)
       .indexOf(req.params.exp_id);
-    profile.experience.splice(removeIndex, 1);
-    await profile.save();
-    res.json(profile);
+    if (removeIndex > -1) {
+      profile.experience.splice(removeIndex, 1);
+      await profile.save();
+      res.json(profile);
+    } else {
+      res.status(400).json({ msg: "id doesn't exits" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+});
+
+// @route         PUT api/profile/education
+// @description   Add profile education
+//@access         Private
+
+router.put(
+  "/education",
+  [
+    auth,
+    [
+      check("school", "School is required")
+        .not()
+        .isEmpty(),
+      check("degree", "Degree is required")
+        .not()
+        .isEmpty(),
+      check("fieldofstudy", "Field of study is required")
+        .not()
+        .isEmpty(),
+      check("from", "From date is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.sendStatus(400).json({ errors: errors.array() });
+    }
+    const {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description
+    } = req.body;
+
+    const newEdu = {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      profile.education.unshift(newEdu);
+      profile.save();
+      res.json(profile);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// @route         DELETE api/profile/education/edu_id
+// @description   Delete education from profile
+//@access         Private
+
+router.delete("/education/:edu_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    // get remove index
+    const removeIndex = profile.education
+      .map(item => item.id)
+      .indexOf(req.params.edu_id);
+    if (removeIndex > -1) {
+      profile.education.splice(removeIndex, 1);
+      await profile.save();
+      res.json(profile);
+    } else {
+      res.status(400).json({ msg: "id doesn't exits" });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error");
