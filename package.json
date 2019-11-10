@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +25,6 @@
   "devDependencies": {
     "concurrently": "^5.0.0",
     "nodemon": "^1.19.4"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
