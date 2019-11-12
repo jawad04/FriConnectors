@@ -27,13 +27,13 @@ const Register = ({ setAlert, register }) => {
       setAlert("Passwords don't match", "danger", 3000);
     } else {
       register({ name, email, password });
-      setAlert("User successfully registered", "success", 5000);
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        password2: ""
-      });
+      // setAlert("User successfully registered", "success", 5000);
+      // setFormData({
+      //   name: "",
+      //   email: "",
+      //   password: "",
+      //   password2: ""
+      // });
       //   const newUser = {
       //     name,
       //     email,
