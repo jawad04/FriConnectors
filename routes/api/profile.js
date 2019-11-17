@@ -22,9 +22,8 @@ router.get("/me", auth, async (req, res) => {
     res.json(profile);
   } catch (error) {
     console.log(error);
-    res.sendStatus(500).send("Server error");
+    res.status(500).send("Server error");
   }
-  res.send("Profile route");
 });
 
 // @route GET api/profile
@@ -270,7 +269,7 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.sendStatus(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() });
     }
     const {
       school,
