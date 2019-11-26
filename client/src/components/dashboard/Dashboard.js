@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner";
 import { getCurrentProfile } from "../../actions/profile";
+import Experience from "./Experience";
+import Education from "./Education";
 import DashboardActions from "./DashboardActions";
 
 const Dashboard = ({
@@ -25,6 +27,8 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
         </Fragment>
       ) : (
         <Fragment>
@@ -47,7 +51,4 @@ const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile
 });
-export default connect(
-  mapStateToProps,
-  { getCurrentProfile }
-)(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
