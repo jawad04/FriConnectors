@@ -5,6 +5,7 @@ import Spinner from "../spinner/spinner";
 import { getPost } from "../../actions/post";
 import PropTypes from "prop-types";
 import PostItem from "../posts/PostItem";
+import CommentForm from "../post/CommentForm";
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         Back to Posts
       </Link>
       <PostItem post={post} showActions={false} />
+      <CommentForm postId={post._id} />
     </Fragment>
   );
 };
