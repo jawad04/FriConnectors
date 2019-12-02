@@ -1,0 +1,7 @@
+{
+    "mongoURI": "mongodb+srv://jawad10:36VgozvcPLejLhCD@devconnectors-ifmjv.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretForJsonWebToken",
+    "githubClientId": "13b9eaf8a5a88261513c",
+    "githubSecret": "9efccde6895581a49b7ab64371ad8004ba4099ad"
+  }
+  
